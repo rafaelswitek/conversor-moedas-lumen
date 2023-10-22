@@ -1,6 +1,6 @@
 {
   "name": "conversor-vue.js",
-  "description": "Conversor de moedas usando API exchangeratesapi.io",
+  "description": "Conversor de moedas usando",
   "version": "1.0.0",
   "author": "Rafael Gonçalves <rafaelswitek@gmail.com>",
   "license": "MIT",

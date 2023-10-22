@@ -2,21 +2,21 @@ import axios from 'axios'
 import store from '../store'
 
 const http = axios.create({
-    baseURL: 'http://conversor.local/api',
-    headers: {
-        'Accept': 'application/json',
-        'Content': 'application/json'
-    }
+  baseURL: 'http://localhost:8086/api',
+  headers: {
+    'Accept': 'application/json',
+    'Content': 'application/json'
+  }
 })
 
 http.interceptors.request.use(function (config) {
-    const token = store.state.token
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`
-    }
-    return config
+  const token = store.state.token
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
 }, function (erro) {
-    return Promise.reject(erro)
+  return Promise.reject(erro)
 })
 
 export default http
