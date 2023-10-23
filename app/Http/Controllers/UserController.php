@@ -17,7 +17,8 @@ class UserController extends Controller
         ]);
         $usuario = User::where('email', $request->email)->first();
 
-        if (is_null($usuario)
+        if (
+            is_null($usuario)
             || !Hash::check($request->password, $usuario->password)
         ) {
             return response()->json('Usuário ou senha inválidos', 401);

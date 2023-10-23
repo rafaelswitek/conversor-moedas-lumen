@@ -10,23 +10,32 @@ class RateController extends Controller
 {
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'base_currency' => 'required|string',
+            'converted_currency' => 'required|string',
+            'base_rate' => 'required|numeric',
+        ]);
+
         $response = Http::withHeaders([
             'Content-Type' => 'text/plain',
             'apikey' => getenv('API_LAYER_KEY'),
-        ])->get("https://api.apilayer.com/exchangerates_data/convert?from={$data['base_currency']}&to={$data['converted_currency']}&amount={$data['base_rate']}");
+        ])->get("https://api.apilayer.com/exchangerates_data/convert", [
+            'from' => $data['base_currency'],
+            'to' => $data['converted_currency'],
+            'amount' => $data['base_rate'],
+        ]);
+
         if (!$response->ok()) {
-            return response()->json($response->body(), $response->status());
+            return response()->json(['message' => 'API request failed'], $response->status());
         }
-        $json = $response->json();
-        $data['converted_rate'] = floatval($json['result']);
-        $result = Rate::create($data);
+
+        $result = Rate::create(array_merge($data, ['converted_rate' => $response['result']]));
         return response()->json($result, 201);
     }
 
-    public function show(Int $id)
+    public function show(int $id)
     {
-        $result = Rate::where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        $result = Rate::where('user_id', $id)->orderByDesc('created_at')->get();
         return response()->json($result, 200);
     }
 }

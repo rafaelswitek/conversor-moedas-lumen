@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => "John Doe",
-            'email' => 'teste@teste.com',
-            'password' => Hash::make('teste@teste.com'),
+            'email' => 'test@example.com',
+            'password' => Hash::make('123456'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
