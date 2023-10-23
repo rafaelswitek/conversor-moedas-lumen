@@ -1,6 +1,7 @@
 # Conversor de moedas
 
-Projeto realizado com VueJS e Lumen usando API [Exchange Rates Data API](https://apilayer.com/marketplace/exchangerates_data-api)
+Projeto realizado Lumen usando API [Exchange Rates Data API](https://apilayer.com/marketplace/exchangerates_data-api)
+
 | :placard: Vitrine.Dev |                         |
 | --------------------- | ----------------------- |
 | :sparkles: Nome       | **Conversor de moedas** |
